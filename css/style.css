@@ -5,10 +5,15 @@
  *
  * Made By MaterializeCSS.com
  */
-
 nav ul a,
 nav .brand-logo {
   color: #444;
+}
+
+nav .logo-image {
+  margin: 0 auto;
+  padding: 0;
+  height: 100%;
 }
 
 p {
@@ -23,17 +28,19 @@ p {
   min-height: 380px;
   line-height: 0;
   height: auto;
-  color: rgba(255,255,255,.9);
+  color: rgba(255, 255, 255, .9);
 }
-  .parallax-container .section {
-    width: 100%;
-  }
+
+.parallax-container .section {
+  width: 100%;
+}
 
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
     position: absolute;
     top: 40%;
   }
+
   #index-banner .section {
     top: 10%;
   }
@@ -48,10 +55,221 @@ p {
 .icon-block {
   padding: 0 15px;
 }
+
 .icon-block .material-icons {
   font-size: inherit;
 }
 
 footer.page-footer {
   margin: 0;
+}
+
+/* 会員登録ページ */
+.pw-form {
+  width: 80%;
+  min-width: 300px;
+  max-width: 500px;
+  margin: auto;
+  background-color: #fafafa;
+  padding: 10px;
+}
+
+.pw-form-header,
+.pw-form p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.pw-form-header {
+  background: #28d;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.pw-form-container {
+  padding: 12px;
+}
+
+/* Every row inside .pw-form-container is defined with p tagss */
+.pw-form p {
+  padding: 12px;
+}
+
+.pw-form input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+.pw-form input[type="email"],
+.pw-form input[type="text"],
+.pw-form input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}
+
+/* Text fields' focus effect */
+.pw-form input[type="email"]:focus,
+.pw-form input[type="text"]:focus,
+.pw-form input[type="password"]:focus {
+  border-color: #888;
+}
+
+.pw-form input[type="submit"] {
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.pw-form input[type="button"] {
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.pw-form input[type="submit"]:hover {
+  background: #17c;
+}
+
+.pw-form input[type="button"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+.pw-form input[type="submit"]:focus {
+  border-color: #05a;
+}
+
+.pw-form input[type="button"]:focus {
+  border-color: #05a;
+}
+
+.field-icon {
+  color: #555;
+  float: right;
+  margin-right: 15px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+}
+
+.form_title {
+  text-align: left !important;
+  padding: 2px 0px;
+  margin: 10px 0px;
+  height: auto;
+}
+
+.form_required_mark {
+  background: #20b2aa;
+  color: white;
+  font-size: 1em;
+  border-radius: 20%;
+  padding: 0px 5px;
+}
+
+label.form_name {
+  color: black !important;
+  font-size: 1em !important;
+  text-align: left;
+}
+
+label.pass2-error {
+  margin: 10px 0px;
+}
+
+label.address-error {
+  height: 20px;
+  margin: 10px 0px;
+}
+
+/* ログインチェック */
+@charset "UTF-8";
+@import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
+.alert {
+  border-radius: 3px;
+  display: flex;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 20px 0;
+  padding: 15px;
+}
+.alert:before {
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-family: "Font Awesome 5 Free";
+  font-display: swap;
+  font-size: 18px;
+  font-weight: 900;
+  height: 18px;
+  margin-right: 5px;
+  text-align: center;
+  vertical-align: top;
+  width: 22px;
+}
+.alert .button {
+  color: #fff;
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 12px;
+  margin: -5px 0 -5px auto;
+  padding: 5px 8px;
+}
+.alert.info {
+  background: #F5F5F5;
+  color: #757575;
+}
+.alert.info:before {
+  content: "";
+}
+.alert.info .button {
+  background: #757575;
+}
+.alert.warning {
+  background: #FFF4C1;
+  color: #F49A26;
+}
+.alert.warning:before {
+  content: "";
+}
+.alert.warning .button {
+  background: #F49A26;
+}
+.alert.error {
+  background: #FCE8E6;
+  color: #FF4C10;
+}
+.alert.error:before {
+  content: "";
+}
+.alert.error .button {
+  background: #FF4C10;
+}
+.alert.success {
+  background: #DDF2F2;
+  color: #00A69F;
+}
+.alert.success:before {
+  content: "";
+}
+.alert.success .button {
+  background: #00A69F;
+}
+
+.error_text {
+  font-size: 40px !important;
+  color: black !important;
 }
