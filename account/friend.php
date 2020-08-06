@@ -12,10 +12,10 @@ else
 	print 'ようこそ';
 	print $_SESSION['regist_name'];
 	print '様　';
-	print '<br />';
+	print '<br /><br />';
 	// ユーザー番号取得
 	$user_num = $_SESSION['regist_number'];
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -35,11 +35,23 @@ else
 	// DB接続(mysql, xampp)
 	$dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
 	$user = 'root';
-	// XAMPP用のpassword
-    $password = '';
-	//$password = 'kcsf';
+	$password = 'kcsf';
 	$dbh = new PDO($dsn,$user,$password);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+	$sql = 'SELECT count(user_number) FROM friendlist
+					WHERE (user_number=? or friend_number=?) and flag=true';
+
+	$stmt = $dbh->prepare($sql);
+	$data_count[] = $user_num;
+	$data_count[] = $user_num;
+	$stmt->execute($data_count);
+
+
+
+	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	$count_user = $rec['count(user_number)'];
 
 	// 送ったフレンド申請
 	// 送ったフレンド申請の数を取得
@@ -53,15 +65,15 @@ else
 
 	$count_send = $rec['count(friend_number)'];
 
+	print '<form method="post" action="friend_get.php">';
 	print '送ったフレンド申請：';
-	print $count_send.'件';
+	print $count_send.'件　　　';
 
 	if($count_send > 0){
-		print '<a href="friend_get.php">申請の詳細へ(画面未作成)</a>';
+		print '<input type="submit" name="get" value="申請の詳細へ">';
 	}
 
-	print '</br>';
-
+	print '</form>';
 
 	// 届いたフレンド申請
 	// 届いたフレンド申請の数を取得
@@ -75,51 +87,46 @@ else
 
 	$count_get = $rec['count(user_number)'];
 
-	print '届いたフレンド申請：';
-	print $count_get.'件';
-
-	if($count_get > 0){
-		print '<a href="friend_get.php">登録の可否へ(画面未作成)</a>';
-	}
-
-	print '</br>';
-
-
-	// フレンド数
-	// フレンドの数を取得
-	$sql = 'SELECT count(user_number) FROM friendlist WHERE user_number=? and flag=true';
-
-	$stmt = $dbh->prepare($sql);
-	// $data[]は不要
-	$stmt->execute($data);
-
 	$dbh = null;
 
-	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+	print '<form method="post" action="friend_add.php">';
+	print '届いたフレンド申請：';
+	print $count_get.'件　　　';
 
-	$count_user = $rec['count(user_number)'];
+	if($count_get > 0){
+		print '<input type="hidden" name="count_friend" value="'.$count_user.'">';
+		print '<input type="submit" name="add" value="登録の可否へ">';
+	}
 
+	print '</form>';
+
+	// フレンド数
+	// フレンドの数を取得(flagがtrue かつ user_number か friend_number に自身の番号があればカウント)
+
+	print '<form method="post" action="friend_list.php">';
 	print 'フレンド数：　';
 	print $count_user;
-	print '　／　１０';
-	print '<a href="friend_list.php">フレンドリストへ(画面未作成)</a>';
-	print '</br>';
-
+	print '　／　10　　';
+	if($count_user > 0){
+		print '<input type="submit" name="list" value="フレンドリストへ">';
+	}
+	print '</form>';
 ?>
 	<!--フレンド申請、指定の名前を検索する-->
 	<form method='POST' action="friend_search.php" enctype="multipart/form-data">
 		<div class="form_title">
 			<label for="name" class="form_name">フレンドを探す</label>
 		</div>
-        <input type="text" name="name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
+        <input type="text" name="search_name" id="name" size="30" maxlength="20" placeholder="フレンド名" autocomplete="off">
         <br>
-             
         <div>
-			<button type="submit">検索(画面未作成）</button>
+			<input type="submit" name="search" value="検索">
         </div>
 	</form>
 
 	<a href="../index.php">トップ画面へ</a>
-
+<?php
+}
+?>
 </body>
 </html>

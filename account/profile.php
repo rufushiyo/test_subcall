@@ -26,9 +26,7 @@ if(isset($_SESSION['bool'])==false){
   <?php
       $dsn = 'mysql:dbname=subcall;host=localhost;charset=utf8';
       $user = 'root';
-      // XAMPP用のmysql
-      $password = '';
-      //$password = 'kcsf';
+      $password = 'kcsf';
       $dbh = new PDO($dsn,$user,$password);
       $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
@@ -55,7 +53,7 @@ if(isset($_SESSION['bool'])==false){
 
       }
 
-
+      print '会員番号：'.$_SESSION['regist_number'].'<br/><br/>';
       print'ユーザ名：'.$_SESSION['regist_name'].'<br/><br/>';
       print'E-mail：'.$_SESSION['regist_address'].'<br/><br/>';
 
